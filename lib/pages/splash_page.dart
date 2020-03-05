@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart';
 import 'package:transparent_image/transparent_image.dart';
 
+import '../blocs/jobs/jobs_bloc.dart';
+import '../blocs/jobs/jobs_event.dart';
+import '../repositoires/job_repository.dart';
 import 'home_page.dart';
 
 class SplashPage extends StatefulWidget {
@@ -17,7 +22,14 @@ class _SplashPageState extends State<SplashPage> {
       () => Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => HomePage(),
+          builder: (context) => BlocProvider(
+            create: (context) => JobsBloc(
+              jobsRepository: JobsRepository(
+                client: Client(),
+              ),
+            )..add(LoadJobs()),
+            child: HomePage(),
+          ),
         ),
       ),
     );

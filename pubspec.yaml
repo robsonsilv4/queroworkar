@@ -15,6 +15,10 @@ dependencies:
   transparent_image: ^1.0.0
   loading: ^1.0.2
   intl: ^0.16.1
+  bloc: ^3.0.0
+  flutter_bloc: ^3.2.0
+  equatable: ^1.1.1
+  meta: ^1.1.8
 
 dev_dependencies:
   flutter_test:

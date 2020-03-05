@@ -1,73 +1,76 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading/indicator/ball_pulse_indicator.dart';
 import 'package:loading/loading.dart';
 
+import '../blocs/jobs/jobs_bloc.dart';
+import '../blocs/jobs/jobs_state.dart';
 import '../models/job_model.dart';
-import '../repositoires/job_repository.dart';
 import 'detail_page.dart';
 
 class HomePage extends StatelessWidget {
-  final jobRepository = JobsRepository(client: Client());
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: _body(),
+      body: BlocBuilder<JobsBloc, JobsState>(
+        // bloc: BlocProvider.of<JobsBloc>(context),
+        builder: (context, state) {
+          if (state is JobsLoaded) {
+            return _body(jobs: state.jobs);
+          }
+
+          return _loading();
+        },
       ),
     );
   }
 
-  Widget _body() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        Padding(
-          padding: EdgeInsets.all(20.0),
-          child: Row(
+  Widget _body({@required List<Job> jobs}) {
+    return jobs.isNotEmpty
+        ? Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Text(
-                'QueroWorkar',
-                style: TextStyle(
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
+              Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                      'QueroWorkar',
+                      style: TextStyle(
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Spacer(),
+                    Icon(Icons.search),
+                  ],
                 ),
               ),
-              Spacer(),
-              Icon(Icons.search),
-            ],
-          ),
-        ),
-        Expanded(
-          child: Container(
-            child: FutureBuilder(
-              future: jobRepository.getJobs(),
-              builder: (contex, snapshot) {
-                if (snapshot.hasData) {
-                  final List<Job> jobs = snapshot.data;
-
-                  return ListView.builder(
+              Expanded(
+                child: Container(
+                  child: ListView.builder(
                     itemCount: jobs.length,
                     itemBuilder: (context, index) {
                       return _jobItem(jobs, index, context);
                     },
-                  );
-                }
-
-                return Center(
-                  child: Loading(
-                    indicator: BallPulseIndicator(),
-                    size: 50.0,
-                    color: Colors.red,
                   ),
-                );
-              },
-            ),
-          ),
-        ),
-      ],
+                ),
+              ),
+            ],
+          )
+        : Center(
+            child: Text('data'),
+          );
+  }
+
+  Widget _loading() {
+    return Center(
+      child: Loading(
+        indicator: BallPulseIndicator(),
+        size: 50.0,
+        color: Colors.red,
+      ),
     );
   }
 
