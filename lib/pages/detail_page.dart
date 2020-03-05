@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:http/http.dart';
@@ -21,32 +23,44 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(jobTitle),
+        iconTheme: IconThemeData(
+          color: Colors.black87,
+        ),
+        title: Text(
+          jobTitle,
+          style: TextStyle(
+            fontSize: 16.0,
+            color: Colors.black87,
+          ),
+        ),
+        titleSpacing: 0.0,
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
       ),
       body: FutureBuilder(
-          future: jobRepository.getJobDetail(jobUrl),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              final String jobDetail = snapshot.data;
+        future: jobRepository.getJobDetail(jobUrl),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final String jobDetail = snapshot.data;
 
-              return Container(
-                child: SingleChildScrollView(
-                  child: Html(
-                    data: jobDetail,
-                    padding: EdgeInsets.all(8.0),
-                  ),
-                ),
-              );
-            }
-
-            return Center(
-              child: Loading(
-                indicator: BallPulseIndicator(),
-                size: 50.0,
-                color: Colors.red,
+            return SingleChildScrollView(
+              child: Html(
+                data: jobDetail,
+                padding: EdgeInsets.all(10.0),
+                // backgroundColor: Colors.white,
               ),
             );
-          }),
+          }
+
+          return Center(
+            child: Loading(
+              indicator: BallPulseIndicator(),
+              size: 50.0,
+              color: Colors.red,
+            ),
+          );
+        },
+      ),
     );
   }
 }
