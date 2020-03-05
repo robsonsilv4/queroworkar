@@ -13,6 +13,7 @@ class App extends StatelessWidget {
       title: 'QueroWorkar',
       theme: ThemeData(
         primarySwatch: Colors.red,
+        fontFamily: 'Nunito',
       ),
       home: SplashPage(),
       debugShowCheckedModeBanner: false,
