@@ -1,11 +1,11 @@
 class Job {
+  String image;
   String title;
-  String date;
-  String description;
+  String url;
 
   Job({
+    this.image,
     this.title,
-    this.date,
-    this.description,
+    this.url,
   });
 }
