@@ -34,7 +34,9 @@ class HomePage extends StatelessWidget {
                 return ListTile(
                   leading: CircleAvatar(
                     radius: 20.0,
-                    backgroundImage: NetworkImage(jobs[index].image),
+                    backgroundImage: jobs[index].image.isNotEmpty
+                        ? NetworkImage(jobs[index].image)
+                        : AssetImage('assets/company_logo.png'),
                     backgroundColor: Colors.transparent,
                   ),
                   title: Text(

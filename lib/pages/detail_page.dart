@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:http/http.dart';
 import 'package:loading/indicator/ball_pulse_indicator.dart';
 import 'package:loading/loading.dart';
 
-import '../models/job_detail_model.dart';
 import '../repositoires/job_repository.dart';
 
 class DetailScreen extends StatelessWidget {
-  final jobRepository = JobsRepository();
+  final jobRepository = JobsRepository(client: Client());
 
   final String jobTitle;
   final String jobUrl;
@@ -27,12 +27,12 @@ class DetailScreen extends StatelessWidget {
           future: jobRepository.getJobDetail(jobUrl),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              final JobDetail jobDetail = snapshot.data;
+              final String jobDetail = snapshot.data;
 
               return Container(
                 child: SingleChildScrollView(
                   child: Html(
-                    data: jobDetail.description,
+                    data: jobDetail,
                     padding: EdgeInsets.all(8.0),
                   ),
                 ),
