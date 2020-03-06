@@ -16,7 +16,9 @@ class HomePage extends StatelessWidget {
         // bloc: BlocProvider.of<JobsBloc>(context),
         builder: (context, state) {
           if (state is JobsLoaded) {
-            return _body(jobs: state.jobs);
+            return SafeArea(
+              child: _body(jobs: state.jobs),
+            );
           }
 
           return _loading();
@@ -29,21 +31,66 @@ class HomePage extends StatelessWidget {
     return jobs.isNotEmpty
         ? Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.all(20.0),
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Text(
-                      'QueroWorkar',
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.bold,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 4.0,
+                      ),
+                      child: Image.asset(
+                        'assets/branding.png',
+                        width: 145.0,
                       ),
                     ),
                     Spacer(),
-                    Icon(Icons.search),
+                    Icon(
+                      Icons.info,
+                      color: Colors.black54,
+                      size: 24.0,
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 22.0,
+                  bottom: 10.0,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(right: 2.0),
+                      child: Image.asset(
+                        'assets/logo.png',
+                        width: 20.0,
+                        height: 20.0,
+                      ),
+                    ),
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Nós encontramos ',
+                            style: TextStyle(color: Colors.black87),
+                          ),
+                          TextSpan(
+                            text: jobs.length.toString(),
+                            style: TextStyle(color: Colors.red.shade600),
+                          ),
+                          TextSpan(
+                            text: ' para você.',
+                            style: TextStyle(color: Colors.black87),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -60,7 +107,9 @@ class HomePage extends StatelessWidget {
             ],
           )
         : Center(
-            child: Text('data'),
+            child: Text(
+              'Não há vagas disponíveis no momento :(',
+            ),
           );
   }
 
