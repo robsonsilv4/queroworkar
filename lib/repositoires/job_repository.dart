@@ -1,7 +1,6 @@
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart';
-import 'package:intl/intl.dart';
 
 import '../models/job_model.dart';
 
@@ -56,15 +55,17 @@ class JobsRepository {
       final url = article.querySelector('a').attributes['href'];
 
       // Data
-      final date = article.querySelector('time').attributes['datetime'];
-      final formatedDate = DateFormat('dd-MM-yyyy').format(
-        DateTime.parse(date),
-      );
+      final date = article
+          .getElementsByClassName(
+            'job-date-ago',
+          )
+          .first
+          .text;
 
       return Job(
         image: image,
         title: title,
-        date: formatedDate,
+        date: date,
         url: url,
       );
     } catch (error) {

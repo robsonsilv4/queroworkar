@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading/indicator/ball_pulse_indicator.dart';
 import 'package:loading/loading.dart';
+import 'package:share/share.dart';
 
 import '../blocs/jobs/jobs_bloc.dart';
 import '../blocs/jobs/jobs_state.dart';
@@ -40,7 +41,7 @@ class HomePage extends StatelessWidget {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 4.0,
+                        horizontal: 2.0,
                       ),
                       child: Image.asset(
                         'assets/branding.png',
@@ -82,10 +83,10 @@ class HomePage extends StatelessWidget {
                           ),
                           TextSpan(
                             text: jobs.length.toString(),
-                            style: TextStyle(color: Colors.red.shade600),
+                            style: TextStyle(color: Colors.red.shade700),
                           ),
                           TextSpan(
-                            text: ' para você.',
+                            text: ' vagas para você.',
                             style: TextStyle(color: Colors.black87),
                           ),
                         ],
@@ -188,17 +189,23 @@ class HomePage extends StatelessWidget {
                         ),
                         Row(
                           children: <Widget>[
-                            Text(
-                              'Ver mais...',
-                              style: TextStyle(
-                                color: Colors.black87,
-                                fontSize: 12.0,
+                            GestureDetector(
+                              child: Text(
+                                'Ver mais...',
+                                style: TextStyle(
+                                  color: Colors.red.shade700,
+                                  fontSize: 12.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              onTap: () => _toDetail(
+                                context: context,
+                                job: jobs.elementAt(index),
                               ),
                             ),
                             Spacer(),
-                            Icon(
-                              Icons.share,
-                              size: 16,
+                            JobShare(
+                              job: jobs.elementAt(index),
                             ),
                           ],
                         ),
@@ -211,19 +218,59 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
+      onDoubleTap: () => _toDetail(
+        context: context,
+        job: jobs.elementAt(index),
+      ),
+      onLongPress: () => _toDetail(
+        context: context,
+        job: jobs.elementAt(index),
+      ),
+    );
+  }
+
+  _toDetail({BuildContext context, Job job}) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return DetailScreen(
+            jobTitle: job.title,
+            jobUrl: job.url,
+          );
+        },
+      ),
+    );
+  }
+}
+
+class JobShare extends StatelessWidget {
+  final Job job;
+
+  JobShare({@required this.job});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      child: Icon(
+        Icons.share,
+        size: 16,
+      ),
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) {
-              return DetailScreen(
-                jobTitle: jobs[index].title,
-                jobUrl: jobs[index].url,
-              );
-            },
-          ),
+        return _share(
+          context: context,
+          url: job.url,
         );
       },
+    );
+  }
+
+  _share({BuildContext context, String url}) {
+    final RenderBox box = context.findRenderObject();
+
+    Share.share(
+      url,
+      sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
     );
   }
 }

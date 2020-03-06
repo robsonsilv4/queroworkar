@@ -46,7 +46,10 @@ class DetailScreen extends StatelessWidget {
             return SingleChildScrollView(
               child: Html(
                 data: jobDetail,
-                padding: EdgeInsets.all(10.0),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 15.0,
+                  vertical: 10.0,
+                ),
                 // backgroundColor: Colors.white,
               ),
             );
