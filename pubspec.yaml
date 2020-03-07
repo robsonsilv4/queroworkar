@@ -18,6 +18,7 @@ dependencies:
   flutter_bloc: ^3.2.0
   equatable: ^1.1.1
   meta: ^1.1.8
+  hydrated_bloc: ^3.0.0
   share: ^0.6.3+6
 
 dev_dependencies:

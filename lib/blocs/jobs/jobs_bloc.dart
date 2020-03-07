@@ -1,17 +1,40 @@
-import 'package:bloc/bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:meta/meta.dart';
 
 import './jobs_event.dart';
 import './jobs_state.dart';
+import '../../models/job_model.dart';
 import '../../repositoires/job_repository.dart';
 
-class JobsBloc extends Bloc<JobsEvent, JobsState> {
+class JobsBloc extends HydratedBloc<JobsEvent, JobsState> {
   final JobsRepository jobsRepository;
 
   JobsBloc({@required this.jobsRepository});
 
   @override
-  JobsState get initialState => JobsLoading();
+  JobsState get initialState {
+    return super.initialState ?? JobsLoading();
+  }
+
+  @override
+  JobsState fromJson(Map<String, dynamic> json) {
+    try {
+      final jobs = json['jobs'].map((job) => Job.fromJson(job)).toList();
+      return JobsLoaded(jobs: jobs);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  @override
+  Map<String, dynamic> toJson(JobsState state) {
+    if (state is JobsLoaded) {
+      final jobs = state.jobs.map((job) => job.toJson()).toList();
+      return {'jobs': jobs};
+    }
+
+    return null;
+  }
 
   @override
   Stream<JobsState> mapEventToState(JobsEvent event) async* {

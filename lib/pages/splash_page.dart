@@ -3,8 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-import '../blocs/jobs/jobs_bloc.dart';
-import '../blocs/jobs/jobs_event.dart';
+import '../blocs/jobs/jobs.dart';
 import '../repositoires/job_repository.dart';
 import 'home_page.dart';
 

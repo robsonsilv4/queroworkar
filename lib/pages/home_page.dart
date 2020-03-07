@@ -4,6 +4,7 @@ import 'package:loading/indicator/ball_pulse_indicator.dart';
 import 'package:loading/loading.dart';
 import 'package:share/share.dart';
 
+import '../blocs/blocs.dart';
 import '../blocs/jobs/jobs_bloc.dart';
 import '../blocs/jobs/jobs_state.dart';
 import '../models/job_model.dart';
@@ -14,104 +15,101 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocBuilder<JobsBloc, JobsState>(
-        // bloc: BlocProvider.of<JobsBloc>(context),
         builder: (context, state) {
           if (state is JobsLoaded) {
-            return SafeArea(
-              child: _body(jobs: state.jobs),
-            );
+            return _body(jobs: state.jobs);
           }
 
-          return _loading();
+          return _body(jobs: []);
         },
       ),
     );
   }
 
   Widget _body({@required List<Job> jobs}) {
-    return jobs.isNotEmpty
-        ? Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(20.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 2.0,
-                      ),
-                      child: Image.asset(
-                        'assets/branding.png',
-                        width: 145.0,
-                      ),
-                    ),
-                    Spacer(),
-                    Icon(
-                      Icons.info,
-                      color: Colors.black54,
-                      size: 24.0,
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 22.0,
-                  bottom: 10.0,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(right: 2.0),
-                      child: Image.asset(
-                        'assets/logo.png',
-                        width: 20.0,
-                        height: 20.0,
-                      ),
-                    ),
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: 'Nós encontramos ',
-                            style: TextStyle(color: Colors.black87),
-                          ),
-                          TextSpan(
-                            text: jobs.length.toString(),
-                            style: TextStyle(color: Colors.red.shade700),
-                          ),
-                          TextSpan(
-                            text: ' vagas para você.',
-                            style: TextStyle(color: Colors.black87),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  child: ListView.builder(
-                    itemCount: jobs.length,
-                    itemBuilder: (context, index) {
-                      return _jobItem(jobs, index, context);
-                    },
+    return SafeArea(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 2.0,
+                  ),
+                  child: Image.asset(
+                    'assets/branding.png',
+                    width: 145.0,
                   ),
                 ),
-              ),
-            ],
-          )
-        : Center(
-            child: Text(
-              'Não há vagas disponíveis no momento :(',
+                Spacer(),
+                Icon(
+                  Icons.info,
+                  color: Colors.black54,
+                  size: 24.0,
+                ),
+              ],
             ),
-          );
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 22.0,
+              bottom: 10.0,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(right: 2.0),
+                  child: Image.asset(
+                    'assets/logo.png',
+                    width: 20.0,
+                    height: 20.0,
+                  ),
+                ),
+                _jobsQuantity(quantity: jobs.length),
+              ],
+            ),
+          ),
+          Expanded(
+            child: jobs.isNotEmpty ? _jobList(jobs: jobs) : _loading(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _jobsQuantity({@required int quantity}) {
+    if (quantity > 0) {
+      return RichText(
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: 'Nós encontramos ',
+              style: TextStyle(color: Colors.black87),
+            ),
+            TextSpan(
+              text: quantity.toString(),
+              style: TextStyle(color: Colors.red.shade700),
+            ),
+            TextSpan(
+              text: ' vagas para você.',
+              style: TextStyle(color: Colors.black87),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return Text(
+      'Procurando vagas...',
+      style: TextStyle(color: Colors.black87),
+    );
   }
 
   Widget _loading() {
@@ -120,6 +118,17 @@ class HomePage extends StatelessWidget {
         indicator: BallPulseIndicator(),
         size: 50.0,
         color: Colors.red,
+      ),
+    );
+  }
+
+  Widget _jobList({@required List<Job> jobs}) {
+    return Container(
+      child: ListView.builder(
+        itemCount: jobs.length,
+        itemBuilder: (context, index) {
+          return _jobItem(jobs, index, context);
+        },
       ),
     );
   }
@@ -157,7 +166,6 @@ class HomePage extends StatelessWidget {
                   SizedBox(
                     width: 15.0,
                   ),
-                  // Utilizar Expanded ou Flexible
                   Flexible(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

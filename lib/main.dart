@@ -1,12 +1,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 
-import 'blocs/app_bloc_delegate.dart';
 import 'pages/splash_page.dart';
 
-void main() {
-  BlocSupervisor.delegate = AppBlocDelegate();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  BlocSupervisor.delegate = await HydratedBlocDelegate.build();
+
   runApp(App());
 }
 
