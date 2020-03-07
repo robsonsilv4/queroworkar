@@ -17,16 +17,25 @@ class HomePage extends StatelessWidget {
       body: BlocBuilder<JobsBloc, JobsState>(
         builder: (context, state) {
           if (state is JobsLoaded) {
-            return _body(jobs: state.jobs);
+            return _body(
+              jobs: state.jobs,
+              context: context,
+            );
           }
 
-          return _body(jobs: []);
+          return _body(
+            jobs: [],
+            context: context,
+          );
         },
       ),
     );
   }
 
-  Widget _body({@required List<Job> jobs}) {
+  Widget _body({
+    @required List<Job> jobs,
+    BuildContext context,
+  }) {
     return SafeArea(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -47,11 +56,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 Spacer(),
-                Icon(
-                  Icons.info,
-                  color: Colors.black54,
-                  size: 24.0,
-                ),
+                _info(context: context),
               ],
             ),
           ),
@@ -81,6 +86,83 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  GestureDetector _info({@required BuildContext context}) {
+    return GestureDetector(
+      child: Icon(
+        Icons.info,
+        color: Colors.black54,
+        size: 24.0,
+      ),
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return SimpleDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(20.0),
+                ),
+              ),
+              contentPadding: EdgeInsets.symmetric(
+                vertical: 15.0,
+              ),
+              children: <Widget>[
+                Text(
+                  'Desenvolvido por:',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 10.0,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+                Text(
+                  'Robson Silva',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12.0,
+                  ),
+                ),
+                Text(
+                  'github.com/robsonsilv4',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 12.0,
+                  ),
+                ),
+                Text(
+                  'linkedin.com/in/robsonsilv4',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 12.0,
+                  ),
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                Text(
+                  'Agradecimentos:',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontStyle: FontStyle.italic,
+                    fontSize: 10.0,
+                  ),
+                ),
+                Text(
+                  'Mobills e Emerson Vieira',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 12.0,
+                  ),
+                ),
+              ],
+            );
+          },
+        );
+      },
     );
   }
 
