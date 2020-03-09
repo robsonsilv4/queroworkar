@@ -2,14 +2,14 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:http/http.dart';
 import 'package:loading/indicator/ball_pulse_indicator.dart';
 import 'package:loading/loading.dart';
 
 import '../repositoires/job_repository.dart';
+import '../service_locator.dart';
 
 class DetailScreen extends StatelessWidget {
-  final jobRepository = JobsRepository(client: Client());
+  final jobRepository = sl.get<JobsRepository>();
 
   final String jobTitle;
   final String jobUrl;

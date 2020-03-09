@@ -4,11 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 import 'pages/splash_page.dart';
+import 'service_locator.dart' as sl;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   BlocSupervisor.delegate = await HydratedBlocDelegate.build();
 
+  sl.setupLocator();
   runApp(App());
 }
 

@@ -1,4 +1,4 @@
-name: QueroWorkar
+name: quero_workar
 description: Encontre as melhores vagas de TI aqui.
 version: 1.0.0+1
 
@@ -9,7 +9,9 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^0.1.2
-  http: ^0.12.0+4
+  get_it: ^4.0.0
+  dio: ^3.0.9
+  dio_http_cache: ^0.2.6
   html: ^0.14.0+3
   flutter_html: ^0.11.1
   transparent_image: ^1.0.0

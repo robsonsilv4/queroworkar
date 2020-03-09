@@ -1,30 +1,40 @@
+import 'package:dio/dio.dart';
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
-import 'package:http/http.dart';
 
+import '../constants/api.dart';
 import '../models/job_model.dart';
 
 class JobsRepository {
-  final Client client;
+  final Dio client;
   final String url;
 
   JobsRepository({
     this.client,
-    this.url = 'https://queroworkar.com.br/',
+    this.url = Api.baseUrl,
   });
 
+  /// Retorna a lista de vagas.
+  ///
+  /// Preenchida com as vagas mais recentes
+  /// ou vazia se ocorreu algum erro.
   Future<List<Job>> getJobs() async {
     final jobs = List<Job>();
 
     try {
       final response = await client.get(url);
-      final document = parse(response.body);
 
-      final articles = document.getElementsByTagName('article');
+      if (response.statusCode == 200) {
+        final document = parse(response.data);
 
-      articles.forEach((article) {
-        jobs.add(parseJob(article));
-      });
+        final articles = document.getElementsByTagName('article');
+
+        articles.forEach((article) {
+          jobs.add(parseJob(article));
+        });
+      }
+
+      return jobs;
     } catch (error) {
       print(error.toString());
     }
@@ -34,7 +44,7 @@ class JobsRepository {
 
   Future<String> getJobDetail(String url) async {
     final response = await client.get(url);
-    final document = parse(response.body);
+    final document = parse(response.data);
 
     return document.getElementsByClassName('job-desc').first.innerHtml;
   }
