@@ -8,25 +8,29 @@ Disponível na [PlayStore](https://play.google.com/store/apps/details?id=tech.ro
 
 ## Um pouco de história
 
-Essa é a versão mobile da já conhecida plataforma que havia sido retirada do ar e que voltou recentemente graças ao Carlos Terceiro e a Mobills. Então resolvi desenvolver a aplicação para retribuir ao QueroWorkar e aplicar os conhecimentos que venho adquirindo em mobile, já que o QueroWorkar era a plataforma onde via as vagas quando comecei a estudar na área de desenvolvimento e sonhava trabalhar um dia. Me inspirei também na primeira versão desenvolvia pelo meu grande amigo Emerson Vieira e se você quiser saber ainda mais um pouco, basta conferir [esse](https://www.linkedin.com/posts/robsonsilv4_flutter-bloc-flutterando-activity-6642161887561736192-FDV4) e [esse](https://www.linkedin.com/posts/robsonsilv4_queroworkar-apps-on-google-play-activity-6644998985910145024-WKRK) outro post.
+Essa é a versão mobile da já conhecida plataforma que havia sido retirada do ar e que voltou recentemente graças ao Carlos Terceiro e a [Mobills](https://www.mobills.com.br/). Então resolvi desenvolver a aplicação para retribuir ao QueroWorkar e aplicar os conhecimentos que venho adquirindo em mobile, já que o QueroWorkar era a plataforma onde via as vagas quando comecei a estudar na área de desenvolvimento e sonhava trabalhar um dia. Me inspirei também na primeira versão desenvolvia pelo meu grande amigo Emerson Vieira e se você quiser saber ainda mais um pouco, basta conferir [esse](https://www.linkedin.com/posts/robsonsilv4_flutter-bloc-flutterando-activity-6642161887561736192-FDV4) e [esse](https://www.linkedin.com/posts/robsonsilv4_queroworkar-apps-on-google-play-activity-6644998985910145024-WKRK) outro post.
+
+---
 
 ### Tecnologias e pacotes utilizados:
 
-- Dart como linguagem principal.
-- Flutter como framework cross plataform.
-- GetIt para injeção de dependência.
-- Dio para requisição web.
-- Dio HTTP Cache para cachear as requisções.
-- HTML para tratamento das páginas.
-- Flutter HTML para transformação de html em widgets.
-- Transparent Image para carregamento das imagens.
-- Loading para animações de carregamento.
-- Bloc para gerencimaneto de estado.
-- Flutter Bloc que são widgets do Bloc para Flutter.
-- Equatable para comparação de objetos.
-- Meta para adição de paramêtros obrigatoórios.
-- Hydrated Bloc para sincronização de dados.
-- Share para compartilhamento.
+- [Dart](https://dart.dev/) como linguagem principal.
+- [Flutter](https://flutter.dev/) como framework cross plataform.
+- [GetIt](https://github.com/fluttercommunity/get_it) para injeção de dependência.
+- [Dio](https://github.com/flutterchina/dio) para requisição web.
+- [Dio HTTP Cache](https://github.com/hurshi/dio-http-cache) para cachear as requisções.
+- [HTML](https://github.com/dart-lang/html) para tratamento das páginas.
+- [Flutter HTML](https://github.com/Sub6Resources/flutter_html) para transformação de html em widgets.
+- [Transparent Image](https://github.com/brianegan/transparent_image) para carregamento das imagens.
+- [Loading](https://github.com/leonzone/loading) para animações de carregamento.
+- [Bloc](https://github.com/felangel/bloc) para gerencimaneto de estado.
+- [Flutter Bloc](https://pub.dev/packages/flutter_bloc) que são widgets do Bloc para Flutter.
+- [Hydrated Bloc](https://github.com/felangel/hydrated_bloc) para sincronização de dados.
+- [Equatable](https://github.com/felangel/equatable) para comparação de objetos.
+- [Meta](https://pub.dev/packages/meta) para adição de paramêtros obrigatoórios.
+- [Share](https://pub.dev/packages/share) para compartilhamento.
+
+---
 
 ### Estrutura de pastas e arquivos:
 
@@ -75,6 +79,8 @@ lib:
                     job_item.dart
 ```
 
+---
+
 ## Como rodar o projeto
 
 Primeiro você precisa clonar o repositório:
@@ -97,6 +103,8 @@ E rodar no seu dispositivo:
 flutter run
 ```
 
+---
+
 ## Como gerar o instalador
 
 Para gerar os instaladores, basta entrar na pasta do projeto e rodar o seguinte comando:
@@ -113,20 +121,31 @@ Os arquivos gerados ficam em:
 quero_workar/build/app/outputs/apk/release/...
 ```
 
+---
+
 ## Como contribuir
 
 Você pode contribuir para o projeto de qualquer maneira. Seja instalado o aplcativo e dando feedback, abrindo issues, melhorando ou trauduzindo a documentação, melhorando ou adicionando features, compartilhando ou falando sobre o projeto, doando ou de qualquer outra forma que conseguir. O importante é que assim como eu, você tenha uma boa experiência e aprenda algo.
+
+---
 
 ## Contribuidores
 
 Desenvolvido incialmente por [Robson Silva](https://github.com/robsonsilv4) com a ajuda dos seguintes [contribuidores](./CONTRIBUTORS.md).
 
-## Liceça
+---
+
+## Licença
 
 A licença utilizado no projeto é a MIT. Para mais detalhes leia o [arquivo](./LICENSE.md).
 
-## Fim
+---
+
+Ah, resolvi não adicionar propagandas no aplicativo, então, adoraria receber alguns cafézinhos pelo PicPay @robsonsilv4 😊.
+E não se esqueçam de conferir também o site do [QueroWorkar](https://queroworkar.com.br/)!
+
+---
+
+Agradeço em especial ao Zarathon Maia ❤️ por ter me disponibilizado a conta de desenvolvedor e desejo a todos um ótimo café e bons estudos 🤓.
 
 E isso é tudo pessoal!
-
-Agradeço ao Zarathon Maira por ter me disponibilizado a conta de desenvolvedor e desejo a todos um ótimo café e bons estudos.
