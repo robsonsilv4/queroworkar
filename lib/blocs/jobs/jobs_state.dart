@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../models/job_model.dart';
+import '../../data/models/job_model.dart';
 
 abstract class JobsState extends Equatable {
   JobsState();

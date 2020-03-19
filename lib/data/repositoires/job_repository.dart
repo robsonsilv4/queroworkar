@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:html/dom.dart';
 import 'package:html/parser.dart';
 
-import '../constants/api.dart';
+import '../../shared/constants/api.dart';
 import '../models/job_model.dart';
 
 class JobsRepository {

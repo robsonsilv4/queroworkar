@@ -3,8 +3,8 @@ import 'package:meta/meta.dart';
 
 import './jobs_event.dart';
 import './jobs_state.dart';
-import '../../models/job_model.dart';
-import '../../repositoires/job_repository.dart';
+import '../../data/models/job_model.dart';
+import '../../data/repositoires/job_repository.dart';
 
 class JobsBloc extends HydratedBloc<JobsEvent, JobsState> {
   final JobsRepository jobsRepository;

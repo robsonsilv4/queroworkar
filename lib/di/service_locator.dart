@@ -2,9 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:get_it/get_it.dart';
 
-import 'blocs/jobs/jobs.dart';
-import 'constants/api.dart';
-import 'repositoires/job_repository.dart';
+import '../blocs/jobs/jobs.dart';
+import '../data/repositoires/job_repository.dart';
+import '../shared/constants/api.dart';
 
 final sl = GetIt.instance;
 

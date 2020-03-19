@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-import '../blocs/jobs/jobs.dart';
-import '../repositoires/job_repository.dart';
-import '../service_locator.dart';
-import 'home_page.dart';
+import '../../blocs/jobs/jobs_bloc.dart';
+import '../../blocs/jobs/jobs_event.dart';
+import '../../data/repositoires/job_repository.dart';
+import '../../di/service_locator.dart';
+import '../../shared/constants/images.dart';
+import 'home_page/home_page.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -45,14 +47,14 @@ class _SplashPageState extends State<SplashPage> {
               FadeInImage(
                 fadeOutDuration: Duration(milliseconds: 100),
                 placeholder: MemoryImage(kTransparentImage),
-                image: AssetImage('assets/logo.png'),
+                image: AssetImage(Images.logo),
                 height: 60.0,
               ),
               SizedBox(height: 4.0),
               FadeInImage(
                 fadeOutDuration: Duration(milliseconds: 300),
                 placeholder: MemoryImage(kTransparentImage),
-                image: AssetImage('assets/branding.png'),
+                image: AssetImage(Images.branding),
                 height: 30.0,
               ),
             ],
