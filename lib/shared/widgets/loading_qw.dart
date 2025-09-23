@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
 class LoadingQW extends StatelessWidget {
+  const LoadingQW({required this.size, super.key, this.color});
   final double size;
   final Color? color;
-
-  const LoadingQW({Key? key, required this.size, this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +11,7 @@ class LoadingQW extends StatelessWidget {
       child: SizedBox.square(
         dimension: size,
         child: CircularProgressIndicator(
-          color: color != null ? color : Theme.of(context).primaryColor,
+          color: color ?? Theme.of(context).primaryColor,
         ),
       ),
     );

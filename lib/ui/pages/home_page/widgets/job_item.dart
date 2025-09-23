@@ -1,52 +1,54 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 
-import '../../../../data/models/job_model.dart';
-import '../../../../shared/constants/images.dart';
-import '../../../../shared/constants/qw_theme.dart';
-import '../../../../shared/widgets/job_share.dart';
-import '../../detail_page.dart';
+import 'package:flutter/material.dart';
+import 'package:quero_workar/data/models/job_model.dart';
+import 'package:quero_workar/shared/constants/images.dart';
+import 'package:quero_workar/shared/constants/qw_theme.dart';
+import 'package:quero_workar/shared/widgets/job_share.dart';
+import 'package:quero_workar/ui/pages/detail_page.dart';
 
 class JobItem extends StatelessWidget {
-  final Job job;
-
   const JobItem({
-    Key? key,
     required this.job,
-  }) : super(key: key);
+    super.key,
+  });
+
+  final Job job;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        margin: EdgeInsets.symmetric(
-          horizontal: 20.0,
-          vertical: 8.0,
+        margin: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 8,
         ),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(15),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.1),
-              blurRadius: 8.0,
+              color: Colors.grey.withAlpha((0.1 * 255).toInt()),
+              blurRadius: 8,
             ),
           ],
         ),
         child: Padding(
-          padding: EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(15),
           child: Column(
             children: <Widget>[
               Row(
                 children: <Widget>[
                   CircleAvatar(
-                    radius: 30.0,
+                    radius: 30,
                     backgroundImage: job.image.isNotEmpty
                         ? NetworkImage(job.image)
-                        : AssetImage(Images.company_logo) as ImageProvider,
+                        : const AssetImage(Images.company_logo)
+                            as ImageProvider,
                     backgroundColor: Colors.transparent,
                   ),
-                  SizedBox(
-                    width: 15.0,
+                  const SizedBox(
+                    width: 15,
                   ),
                   Flexible(
                     child: Column(
@@ -58,24 +60,24 @@ class JobItem extends StatelessWidget {
                             Text(
                               job.title,
                               overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontSize: 14.0,
+                              style: const TextStyle(
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold,
                                 color: QWTheme.title,
                               ),
                             ),
-                            SizedBox(height: 1.0),
+                            const SizedBox(height: 1),
                             Text(
                               job.date,
-                              style: TextStyle(
-                                fontSize: 12.0,
+                              style: const TextStyle(
+                                fontSize: 12,
                                 color: Colors.grey,
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 6.0,
+                        const SizedBox(
+                          height: 6,
                         ),
                         Row(
                           children: <Widget>[
@@ -84,7 +86,7 @@ class JobItem extends StatelessWidget {
                                 'Ver mais...',
                                 style: TextStyle(
                                   color: Colors.red.shade700,
-                                  fontSize: 12.0,
+                                  fontSize: 12,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -93,7 +95,7 @@ class JobItem extends StatelessWidget {
                                 job: job,
                               ),
                             ),
-                            Spacer(),
+                            const Spacer(),
                             JobShare(
                               job: job,
                             ),
@@ -101,7 +103,7 @@ class JobItem extends StatelessWidget {
                         ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ],
@@ -119,16 +121,18 @@ class JobItem extends StatelessWidget {
     );
   }
 
-  _toDetail({required Job job, required BuildContext context}) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) {
-          return DetailScreen(
-            jobTitle: job.title,
-            jobUrl: job.url,
-          );
-        },
+  void _toDetail({required Job job, required BuildContext context}) {
+    unawaited(
+      Navigator.push(
+        context,
+        MaterialPageRoute<void>(
+          builder: (context) {
+            return DetailScreen(
+              jobTitle: job.title,
+              jobUrl: job.url,
+            );
+          },
+        ),
       ),
     );
   }

@@ -1,24 +1,24 @@
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-
-import '../../data/models/job_model.dart';
-import '../../data/repositoires/job_repository.dart';
-import './jobs_event.dart';
-import './jobs_state.dart';
+import 'package:quero_workar/blocs/jobs/jobs_event.dart';
+import 'package:quero_workar/blocs/jobs/jobs_state.dart';
+import 'package:quero_workar/data/models/job_model.dart';
+import 'package:quero_workar/data/repositoires/job_repository.dart';
 
 class JobsBloc extends HydratedBloc<JobsEvent, JobsState> {
-  final JobsRepository jobsRepository;
-
   JobsBloc({required this.jobsRepository}) : super(JobsLoading()) {
-    on<LoadJobs>((event, emit) => _mapLoadJobsToState(event, emit));
+    on<LoadJobs>(_mapLoadJobsToState);
   }
+
+  final JobsRepository jobsRepository;
 
   @override
   JobsState fromJson(Map<String, dynamic> json) {
     try {
-      final jobs = json['jobs'].map((job) => Job.fromJson(job)).toList();
+      final jobs = (json['jobs'] as List)
+          .map((job) => Job.fromJson(job as Map<String, dynamic>))
+          .toList();
       return JobsLoaded(jobs: jobs);
-    } catch (error) {
-      // return null;
+    } on Exception catch (_) {
       return JobsNotLoaded();
     }
   }
@@ -30,7 +30,6 @@ class JobsBloc extends HydratedBloc<JobsEvent, JobsState> {
       return {'jobs': jobs};
     }
 
-    // return null;
     return {};
   }
 
@@ -44,7 +43,7 @@ class JobsBloc extends HydratedBloc<JobsEvent, JobsState> {
       final jobs = await jobsRepository.getJobs();
 
       emit(JobsLoaded(jobs: jobs));
-    } catch (error) {
+    } on Exception catch (_) {
       emit(JobsNotLoaded());
     }
   }

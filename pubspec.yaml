@@ -6,27 +6,27 @@ environment:
   sdk: ">=3.0.0 <4.0.0"
 
 dependencies:
-  flutter:
-    sdk: flutter
+  bloc: ^9.0.0
   cupertino_icons: ^1.0.8
-  get_it: ^8.2.0
   dio: ^4.0.0 # dio_http_cache depends on
   dio_http_cache: ^0.3.0
-  html: ^0.15.6
-  flutter_html: ^3.0.0
-  transparent_image: ^2.0.1
-  # loading: ^1.0.2
-  bloc: ^9.0.0
-  flutter_bloc: ^9.1.1
   equatable: ^2.0.7
-  meta: ^1.16.0 # flutter_test depends on
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^9.1.1
+  flutter_html: ^3.0.0
+  get_it: ^8.2.0
+  html: ^0.15.6
   hydrated_bloc: ^10.1.1
+  meta: ^1.16.0 # flutter_test depends on
   path_provider: ^2.1.5
   share_plus: ^12.0.0
+  transparent_image: ^2.0.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  very_good_analysis: ^10.0.0
 
 flutter:
   uses-material-design: true

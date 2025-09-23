@@ -1,9 +1,4 @@
 class Job {
-  String image;
-  String title;
-  String date;
-  String url;
-
   Job({
     required this.image,
     required this.title,
@@ -11,17 +6,22 @@ class Job {
     required this.url,
   });
 
+  factory Job.fromJson(Map<String, dynamic> json) => Job(
+        image: json['image'] as String,
+        title: json['title'] as String,
+        date: json['date'] as String,
+        url: json['url'] as String,
+      );
+
+  String image;
+  String title;
+  String date;
+  String url;
+
   Map<String, dynamic> toJson() => {
         'image': image,
         'title': title,
         'date': date,
         'url': url,
       };
-
-  factory Job.fromJson(Map<String, dynamic> json) => Job(
-        image: json['image'],
-        title: json['title'],
-        date: json['date'],
-        url: json['url'],
-      );
 }
