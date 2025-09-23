@@ -1,19 +1,15 @@
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:meta/meta.dart';
 
-import './jobs_event.dart';
-import './jobs_state.dart';
 import '../../data/models/job_model.dart';
 import '../../data/repositoires/job_repository.dart';
+import './jobs_event.dart';
+import './jobs_state.dart';
 
 class JobsBloc extends HydratedBloc<JobsEvent, JobsState> {
   final JobsRepository jobsRepository;
 
-  JobsBloc({@required this.jobsRepository});
-
-  @override
-  JobsState get initialState {
-    return super.initialState ?? JobsLoading();
+  JobsBloc({required this.jobsRepository}) : super(JobsLoading()) {
+    on<LoadJobs>((event, emit) => _mapLoadJobsToState(event, emit));
   }
 
   @override
@@ -22,7 +18,8 @@ class JobsBloc extends HydratedBloc<JobsEvent, JobsState> {
       final jobs = json['jobs'].map((job) => Job.fromJson(job)).toList();
       return JobsLoaded(jobs: jobs);
     } catch (error) {
-      return null;
+      // return null;
+      return JobsNotLoaded();
     }
   }
 
@@ -33,23 +30,22 @@ class JobsBloc extends HydratedBloc<JobsEvent, JobsState> {
       return {'jobs': jobs};
     }
 
-    return null;
+    // return null;
+    return {};
   }
 
-  @override
-  Stream<JobsState> mapEventToState(JobsEvent event) async* {
-    if (event is LoadJobs) {
-      yield* _mapLoadJobsToState();
-    }
-  }
+  Future<void> _mapLoadJobsToState(
+    LoadJobs event,
+    Emitter<JobsState> emit,
+  ) async {
+    emit(JobsLoading());
 
-  Stream<JobsState> _mapLoadJobsToState() async* {
     try {
       final jobs = await jobsRepository.getJobs();
 
-      yield JobsLoaded(jobs: jobs);
+      emit(JobsLoaded(jobs: jobs));
     } catch (error) {
-      yield JobsNotLoaded();
+      emit(JobsNotLoaded());
     }
   }
 }

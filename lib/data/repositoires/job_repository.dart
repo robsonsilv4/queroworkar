@@ -10,7 +10,7 @@ class JobsRepository {
   final String url;
 
   JobsRepository({
-    this.client,
+    required this.client,
     this.url = Api.baseUrl,
   });
 
@@ -19,7 +19,7 @@ class JobsRepository {
   /// Preenchida com as vagas mais recentes
   /// ou vazia se ocorreu algum erro.
   Future<List<Job>> getJobs() async {
-    final jobs = List<Job>();
+    final jobs = <Job>[];
 
     try {
       final response = await client.get(url);
@@ -30,7 +30,8 @@ class JobsRepository {
         final articles = document.getElementsByTagName('article');
 
         articles.forEach((article) {
-          jobs.add(parseJob(article));
+          final job = parseJob(article);
+          if (job != null) jobs.add(job);
         });
       }
 
@@ -49,20 +50,20 @@ class JobsRepository {
     return document.getElementsByClassName('job-desc').first.innerHtml;
   }
 
-  Job parseJob(Element article) {
+  Job? parseJob(Element article) {
     try {
       String image;
 
       // Imagem
       try {
-        image = article.querySelector('img').attributes['src'];
+        image = article.querySelector('img')?.attributes['src'] ?? '';
       } catch (error) {
         image = '';
       }
 
       // Título e endereço
-      final title = article.querySelector('h2').text.trim();
-      final url = article.querySelector('a').attributes['href'];
+      final title = article.querySelector('h2')?.text.trim() ?? '';
+      final url = article.querySelector('a')?.attributes['href'] ?? '';
 
       // Data
       final date = article

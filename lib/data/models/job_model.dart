@@ -5,10 +5,10 @@ class Job {
   String url;
 
   Job({
-    this.image,
-    this.title,
-    this.date,
-    this.url,
+    required this.image,
+    required this.title,
+    required this.date,
+    required this.url,
   });
 
   Map<String, dynamic> toJson() => {

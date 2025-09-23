@@ -10,8 +10,8 @@ class JobItem extends StatelessWidget {
   final Job job;
 
   const JobItem({
-    Key key,
-    @required this.job,
+    Key? key,
+    required this.job,
   }) : super(key: key);
 
   @override
@@ -42,7 +42,7 @@ class JobItem extends StatelessWidget {
                     radius: 30.0,
                     backgroundImage: job.image.isNotEmpty
                         ? NetworkImage(job.image)
-                        : AssetImage(Images.company_logo),
+                        : AssetImage(Images.company_logo) as ImageProvider,
                     backgroundColor: Colors.transparent,
                   ),
                   SizedBox(
@@ -119,7 +119,7 @@ class JobItem extends StatelessWidget {
     );
   }
 
-  _toDetail({@required Job job, BuildContext context}) {
+  _toDetail({required Job job, required BuildContext context}) {
     Navigator.push(
       context,
       MaterialPageRoute(

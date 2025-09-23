@@ -6,8 +6,8 @@ class JobsQuantity extends StatelessWidget {
   final int quantity;
 
   const JobsQuantity({
-    Key key,
-    @required this.quantity,
+    Key? key,
+    required this.quantity,
   }) : super(key: key);
 
   @override

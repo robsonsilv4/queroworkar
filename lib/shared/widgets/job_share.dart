@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:quero_workar/data/models/job_model.dart';
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 
 class JobShare extends StatelessWidget {
   final Job job;
 
-  JobShare({@required this.job});
+  JobShare({required this.job});
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +23,14 @@ class JobShare extends StatelessWidget {
     );
   }
 
-  _share({BuildContext context, String url}) {
-    final RenderBox box = context.findRenderObject();
+  _share({required BuildContext context, required String url}) {
+    final box = context.findRenderObject() as RenderBox?;
 
-    Share.share(
-      url,
+    if (box == null) return;
+
+    SharePlus.instance.share(ShareParams(
+      text: url,
       sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
-    );
+    ));
   }
 }

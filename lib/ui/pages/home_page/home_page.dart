@@ -32,8 +32,8 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _body({
-    @required List<Job> jobs,
-    BuildContext context,
+    required List<Job> jobs,
+    required BuildContext context,
   }) {
     return SafeArea(
       child: Column(
@@ -92,7 +92,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _jobList({@required List<Job> jobs}) {
+  Widget _jobList({required List<Job> jobs}) {
     return Container(
       child: ListView.builder(
         itemCount: jobs.length,
