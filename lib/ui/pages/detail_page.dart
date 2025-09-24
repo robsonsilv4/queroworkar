@@ -1,65 +1,54 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:loading/indicator/ball_pulse_indicator.dart';
-import 'package:loading/loading.dart';
-
-import '../../data/repositoires/job_repository.dart';
-import '../../di/service_locator.dart';
+import 'package:quero_workar/data/repositories/job_repository.dart';
+import 'package:quero_workar/di/service_locator.dart';
 
 class DetailScreen extends StatelessWidget {
-  final jobRepository = sl.get<JobsRepository>();
+  DetailScreen({required this.jobTitle, required this.jobUrl, super.key});
+  final JobsRepository jobRepository = sl.get<JobsRepository>();
 
   final String jobTitle;
   final String jobUrl;
-
-  DetailScreen({
-    @required this.jobTitle,
-    @required this.jobUrl,
-  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Colors.black87,
-        ),
+        iconTheme: const IconThemeData(color: Colors.black87),
         title: Text(
           jobTitle,
-          style: TextStyle(
-            fontSize: 16.0,
-            color: Colors.black87,
-          ),
+          style: const TextStyle(fontSize: 16, color: Colors.black87),
         ),
-        titleSpacing: 0.0,
+        titleSpacing: 0,
         backgroundColor: Colors.transparent,
-        elevation: 0.0,
+        elevation: 0,
       ),
-      body: FutureBuilder(
+      body: FutureBuilder<String>(
         future: jobRepository.getJobDetail(jobUrl),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            final String jobDetail = snapshot.data;
+            final jobDetail = snapshot.data;
+
+            if (jobDetail == null || jobDetail.isEmpty) {
+              return const Center(
+                child: Text('Não foi possível carregar os detalhes.'),
+              );
+            }
 
             return SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               child: Html(
                 data: jobDetail,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 15.0,
-                  vertical: 10.0,
-                ),
-                // backgroundColor: Colors.white,
               ),
             );
           }
 
-          return Center(
-            child: Loading(
-              indicator: BallPulseIndicator(),
-              size: 50.0,
-              color: Colors.red,
+          return const Center(
+            child: SizedBox.square(
+              dimension: 50,
+              child: CircularProgressIndicator(
+                color: Colors.red,
+              ),
             ),
           );
         },

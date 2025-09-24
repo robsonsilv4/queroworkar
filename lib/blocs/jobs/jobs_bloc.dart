@@ -1,28 +1,25 @@
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:meta/meta.dart';
-
-import './jobs_event.dart';
-import './jobs_state.dart';
-import '../../data/models/job_model.dart';
-import '../../data/repositoires/job_repository.dart';
+import 'package:quero_workar/blocs/jobs/jobs_event.dart';
+import 'package:quero_workar/blocs/jobs/jobs_state.dart';
+import 'package:quero_workar/data/models/job_model.dart';
+import 'package:quero_workar/data/repositories/job_repository.dart';
 
 class JobsBloc extends HydratedBloc<JobsEvent, JobsState> {
-  final JobsRepository jobsRepository;
-
-  JobsBloc({@required this.jobsRepository});
-
-  @override
-  JobsState get initialState {
-    return super.initialState ?? JobsLoading();
+  JobsBloc({required this.jobsRepository}) : super(JobsLoading()) {
+    on<LoadJobs>(_mapLoadJobsToState);
   }
+
+  final JobsRepository jobsRepository;
 
   @override
   JobsState fromJson(Map<String, dynamic> json) {
     try {
-      final jobs = json['jobs'].map((job) => Job.fromJson(job)).toList();
+      final jobs = (json['jobs'] as List)
+          .map((job) => Job.fromJson(job as Map<String, dynamic>))
+          .toList();
       return JobsLoaded(jobs: jobs);
-    } catch (error) {
-      return null;
+    } on Exception catch (_) {
+      return JobsNotLoaded();
     }
   }
 
@@ -33,23 +30,21 @@ class JobsBloc extends HydratedBloc<JobsEvent, JobsState> {
       return {'jobs': jobs};
     }
 
-    return null;
+    return {};
   }
 
-  @override
-  Stream<JobsState> mapEventToState(JobsEvent event) async* {
-    if (event is LoadJobs) {
-      yield* _mapLoadJobsToState();
-    }
-  }
+  Future<void> _mapLoadJobsToState(
+    LoadJobs event,
+    Emitter<JobsState> emit,
+  ) async {
+    emit(JobsLoading());
 
-  Stream<JobsState> _mapLoadJobsToState() async* {
     try {
       final jobs = await jobsRepository.getJobs();
 
-      yield JobsLoaded(jobs: jobs);
-    } catch (error) {
-      yield JobsNotLoaded();
+      emit(JobsLoaded(jobs: jobs));
+    } on Exception catch (_) {
+      emit(JobsNotLoaded());
     }
   }
 }
