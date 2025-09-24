@@ -43,8 +43,7 @@ class JobItem extends StatelessWidget {
                     radius: 30,
                     backgroundImage: job.image.isNotEmpty
                         ? NetworkImage(job.image)
-                        : const AssetImage(Images.company_logo)
-                            as ImageProvider,
+                        : const AssetImage(Images.companyLogo) as ImageProvider,
                     backgroundColor: Colors.transparent,
                   ),
                   const SizedBox(

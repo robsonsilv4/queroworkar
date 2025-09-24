@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-
-import 'package:quero_workar/data/repositoires/job_repository.dart';
+import 'package:quero_workar/data/repositories/job_repository.dart';
 import 'package:quero_workar/di/service_locator.dart';
 
 class DetailScreen extends StatelessWidget {
@@ -40,8 +39,6 @@ class DetailScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               child: Html(
                 data: jobDetail,
-                // padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
-                // backgroundColor: Colors.white,
               ),
             );
           }

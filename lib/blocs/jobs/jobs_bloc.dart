@@ -2,7 +2,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:quero_workar/blocs/jobs/jobs_event.dart';
 import 'package:quero_workar/blocs/jobs/jobs_state.dart';
 import 'package:quero_workar/data/models/job_model.dart';
-import 'package:quero_workar/data/repositoires/job_repository.dart';
+import 'package:quero_workar/data/repositories/job_repository.dart';
 
 class JobsBloc extends HydratedBloc<JobsEvent, JobsState> {
   JobsBloc({required this.jobsRepository}) : super(JobsLoading()) {

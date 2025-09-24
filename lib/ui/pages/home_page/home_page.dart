@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:quero_workar/blocs/blocs.dart';
 import 'package:quero_workar/data/models/job_model.dart';
 import 'package:quero_workar/shared/constants/images.dart';
@@ -92,15 +91,13 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _jobList({required List<Job> jobs}) {
-    return Container(
-      child: ListView.builder(
-        itemCount: jobs.length,
-        itemBuilder: (context, index) {
-          return JobItem(
-            job: jobs.elementAt(index),
-          );
-        },
-      ),
+    return ListView.builder(
+      itemCount: jobs.length,
+      itemBuilder: (context, index) {
+        return JobItem(
+          job: jobs.elementAt(index),
+        );
+      },
     );
   }
 }
