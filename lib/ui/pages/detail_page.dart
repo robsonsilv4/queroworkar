@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:quero_workar/data/repositories/job_repository.dart';
+import 'package:quero_workar/data/repositories/repositories.dart';
 import 'package:quero_workar/di/service_locator.dart';
 
 class DetailScreen extends StatelessWidget {
   DetailScreen({required this.jobTitle, required this.jobUrl, super.key});
-  final JobsRepository jobRepository = sl.get<JobsRepository>();
+
+  final JobRepository jobRepository = sl.get<JobRepository>();
 
   final String jobTitle;
   final String jobUrl;

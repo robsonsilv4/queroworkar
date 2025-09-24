@@ -2,14 +2,14 @@ import 'package:dio/dio.dart';
 import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:get_it/get_it.dart';
 import 'package:quero_workar/blocs/jobs/jobs.dart';
-import 'package:quero_workar/data/repositories/job_repository.dart';
+import 'package:quero_workar/data/repositories/repositories.dart';
 import 'package:quero_workar/shared/constants/api.dart';
 
 final GetIt sl = GetIt.instance;
 
 void setupLocator() {
   sl
-    ..registerLazySingleton<JobsRepository>(
+    ..registerLazySingleton<JobRepository>(
       () {
         final dio = Dio();
         dio.interceptors.add(
@@ -18,7 +18,7 @@ void setupLocator() {
           ).interceptor as Interceptor,
         );
 
-        return JobsRepository(
+        return JobHtmlRepository(
           client: dio,
         );
       },
