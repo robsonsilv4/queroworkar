@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
-
 import 'package:quero_workar/di/service_locator.dart' as sl;
 import 'package:quero_workar/ui/pages/splash_page.dart';
 
