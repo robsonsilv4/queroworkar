@@ -10,12 +10,12 @@ class Job extends Equatable {
   });
 
   factory Job.fromJson(Map<String, dynamic> json) => Job(
-        image: json['image'] as String,
-        title: json['title'] as String,
-        description: json['description'] as String,
-        date: DateTime.parse(json['date'] as String),
-        url: json['url'] as String,
-      );
+    image: json['image'] as String,
+    title: json['title'] as String,
+    description: json['description'] as String,
+    date: DateTime.parse(json['date'] as String),
+    url: json['url'] as String,
+  );
 
   static final empty = Job(
     image: '',
@@ -32,12 +32,12 @@ class Job extends Equatable {
   final String url;
 
   Map<String, dynamic> toJson() => {
-        'image': image,
-        'title': title,
-        'description': description,
-        'date': date.toIso8601String(),
-        'url': url,
-      };
+    'image': image,
+    'title': title,
+    'description': description,
+    'date': date.toIso8601String(),
+    'url': url,
+  };
 
   @override
   List<Object?> get props => [image, title, description, date, url];
