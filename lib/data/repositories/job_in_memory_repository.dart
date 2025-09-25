@@ -12,7 +12,7 @@ class JobInMemoryRepository implements JobRepository {
       description:
           'Desenvolva aplicativos móveis usando Flutter em um time ágil.',
       image: 'https://picsum.photos/150?random=1',
-      date: DateTime(2025, 6),
+      date: DateTime(2025, 3, 14, 10, 23),
     ),
     Job(
       title: 'Backend Developer',
@@ -20,7 +20,7 @@ class JobInMemoryRepository implements JobRepository {
       description:
           'Responsável pelo desenvolvimento e manutenção de APIs RESTful.',
       image: 'https://picsum.photos/150?random=2',
-      date: DateTime(2025, 5),
+      date: DateTime(2025, 7, 2, 8, 5),
     ),
     Job(
       title: 'UI/UX Designer',
@@ -28,7 +28,7 @@ class JobInMemoryRepository implements JobRepository {
       description:
           'Crie interfaces intuitivas e experiências incríveis para usuários.',
       image: 'https://picsum.photos/150?random=3',
-      date: DateTime(2025, 4),
+      date: DateTime(2024, 12, 27, 18, 45),
     ),
   ];
 

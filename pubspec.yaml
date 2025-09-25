@@ -16,9 +16,12 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^9.1.1
   flutter_html: ^3.0.0
+  flutter_localizations:
+    sdk: flutter
   get_it: ^8.2.0
   html: ^0.15.6
   hydrated_bloc: ^10.1.1
+  intl: ^0.20.2
   # flutter_test depends on this version
   meta: ^1.16.0
   path_provider: ^2.1.5

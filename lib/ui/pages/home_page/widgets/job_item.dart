@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:quero_workar/data/models/job_model.dart';
+import 'package:quero_workar/shared/constants/date_format.dart';
 import 'package:quero_workar/shared/constants/images.dart';
 import 'package:quero_workar/shared/constants/qw_theme.dart';
 import 'package:quero_workar/shared/widgets/job_share.dart';
@@ -64,8 +65,7 @@ class JobItem extends StatelessWidget {
                             ),
                             const SizedBox(height: 1),
                             Text(
-                              // Format date later
-                              job.date.toString(),
+                              dateTimeFormat.format(job.date),
                               style: const TextStyle(
                                 fontSize: 12,
                                 color: Colors.grey,
