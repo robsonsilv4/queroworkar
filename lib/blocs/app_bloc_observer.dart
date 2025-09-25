@@ -2,7 +2,7 @@ import 'dart:developer' as dev;
 
 import 'package:bloc/bloc.dart';
 
-class AppBlocDelegate extends BlocObserver {
+class AppBlocObserver extends BlocObserver {
   @override
   void onChange(BlocBase<dynamic> bloc, Change<dynamic> change) {
     dev.log('Bloc change: $change');
