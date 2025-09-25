@@ -82,7 +82,7 @@ class JobHtmlRepository implements JobRepository {
         image: image,
         title: title,
         description: '',
-        date: date,
+        date: DateTime.parse(date),
         url: url,
       );
     } on Exception catch (_) {

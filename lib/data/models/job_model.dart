@@ -13,29 +13,29 @@ class Job extends Equatable {
         image: json['image'] as String,
         title: json['title'] as String,
         description: json['description'] as String,
-        date: json['date'] as String,
+        date: DateTime.parse(json['date'] as String),
         url: json['url'] as String,
       );
 
-  static const empty = Job(
+  static final empty = Job(
     image: '',
     title: '',
     description: '',
-    date: '',
+    date: DateTime.now(),
     url: '',
   );
 
   final String image;
   final String title;
   final String description;
-  final String date;
+  final DateTime date;
   final String url;
 
   Map<String, dynamic> toJson() => {
         'image': image,
         'title': title,
         'description': description,
-        'date': date,
+        'date': date.toIso8601String(),
         'url': url,
       };
 

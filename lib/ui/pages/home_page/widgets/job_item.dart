@@ -67,7 +67,8 @@ class JobItem extends StatelessWidget {
                             ),
                             const SizedBox(height: 1),
                             Text(
-                              job.date,
+                              // Format date later
+                              job.date.toString(),
                               style: const TextStyle(
                                 fontSize: 12,
                                 color: Colors.grey,
