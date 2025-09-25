@@ -1,9 +1,8 @@
 import 'package:equatable/equatable.dart';
-
-import '../../data/models/job_model.dart';
+import 'package:quero_workar/data/models/job_model.dart';
 
 abstract class JobsState extends Equatable {
-  JobsState();
+  const JobsState();
 
   @override
   List<Object> get props => [];
@@ -12,9 +11,9 @@ abstract class JobsState extends Equatable {
 class JobsLoading extends JobsState {}
 
 class JobsLoaded extends JobsState {
-  final List<Job> jobs;
+  const JobsLoaded({this.jobs = const []});
 
-  JobsLoaded({this.jobs = const []});
+  final List<Job> jobs;
 
   @override
   List<Object> get props => [jobs];

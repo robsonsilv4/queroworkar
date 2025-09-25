@@ -1,34 +1,39 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:quero_workar/data/models/job_model.dart';
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 
 class JobShare extends StatelessWidget {
+  const JobShare({required this.job, super.key});
   final Job job;
-
-  JobShare({@required this.job});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      child: Icon(
+      child: const Icon(
         Icons.share,
         size: 16,
       ),
-      onTap: () {
-        return _share(
-          context: context,
-          url: job.url,
-        );
-      },
+      onTap: () => _share(context: context, url: job.url),
     );
   }
 
-  _share({BuildContext context, String url}) {
-    final RenderBox box = context.findRenderObject();
+  Future<void> _share({
+    required BuildContext context,
+    required String url,
+  }) async {
+    final box = context.findRenderObject() as RenderBox?;
 
-    Share.share(
-      url,
-      sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
+    if (box == null) return;
+
+    unawaited(
+      SharePlus.instance.share(
+        ShareParams(
+          text: url,
+          sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size,
+        ),
+      ),
     );
   }
 }
