@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:quero_workar/data/models/job_model.dart';
 import 'package:quero_workar/shared/constants/images.dart';
@@ -39,12 +40,8 @@ class JobItem extends StatelessWidget {
             children: <Widget>[
               Row(
                 children: <Widget>[
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundImage: job.image.isNotEmpty
-                        ? NetworkImage(job.image)
-                        : const AssetImage(Images.companyLogo) as ImageProvider,
-                    backgroundColor: Colors.transparent,
+                  _CompanyLogoAvatar(
+                    imageUrl: job.image,
                   ),
                   const SizedBox(
                     width: 15,
@@ -134,6 +131,42 @@ class JobItem extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+}
+
+class _CompanyLogoAvatar extends StatelessWidget {
+  const _CompanyLogoAvatar({
+    required this.imageUrl,
+    // The radius could be passed as parameter if needed
+    // ignore: unused_element_parameter
+    this.radius = 30.0,
+  });
+
+  final String imageUrl;
+  final double radius;
+
+  @override
+  Widget build(BuildContext context) {
+    final size = radius * 2;
+    final cacheSize = size.ceil();
+    late final placeholder = Image.asset(Images.companyLogo);
+    return CachedNetworkImage(
+      imageUrl: imageUrl,
+      width: size,
+      height: size,
+      memCacheWidth: cacheSize,
+      memCacheHeight: cacheSize,
+      fit: BoxFit.contain,
+      placeholder: (context, url) => placeholder,
+      errorWidget: (context, url, error) => placeholder,
+      imageBuilder: (context, imageProvider) {
+        return CircleAvatar(
+          backgroundColor: Colors.transparent,
+          backgroundImage: imageProvider,
+          radius: radius,
+        );
+      },
     );
   }
 }
