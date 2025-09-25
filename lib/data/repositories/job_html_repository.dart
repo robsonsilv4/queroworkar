@@ -11,8 +11,8 @@ class JobHtmlRepository implements JobRepository {
   JobHtmlRepository({
     required Dio client,
     String url = Api.baseUrl,
-  })  : _url = url,
-        _client = client;
+  }) : _url = url,
+       _client = client;
 
   final Dio _client;
   final String _url;

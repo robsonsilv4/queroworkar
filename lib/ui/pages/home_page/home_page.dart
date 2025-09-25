@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quero_workar/blocs/blocs.dart';
 import 'package:quero_workar/data/models/job_model.dart';
-import 'package:quero_workar/shared/constants/images.dart';
+import 'package:quero_workar/shared/constants/constants.dart';
 import 'package:quero_workar/shared/widgets/info_widget.dart';
 import 'package:quero_workar/shared/widgets/loading_qw.dart';
 import 'package:quero_workar/ui/pages/home_page/widgets/job_item.dart';

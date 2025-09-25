@@ -3,9 +3,7 @@ import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:quero_workar/data/models/job_model.dart';
-import 'package:quero_workar/shared/constants/date_format.dart';
-import 'package:quero_workar/shared/constants/images.dart';
-import 'package:quero_workar/shared/constants/qw_theme.dart';
+import 'package:quero_workar/shared/constants/constants.dart';
 import 'package:quero_workar/shared/widgets/job_share.dart';
 import 'package:quero_workar/ui/pages/detail_page.dart';
 

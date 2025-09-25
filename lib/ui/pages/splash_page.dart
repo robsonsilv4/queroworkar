@@ -4,7 +4,7 @@ import 'package:quero_workar/blocs/jobs/jobs_bloc.dart';
 import 'package:quero_workar/blocs/jobs/jobs_event.dart';
 import 'package:quero_workar/data/repositories/repositories.dart';
 import 'package:quero_workar/di/service_locator.dart';
-import 'package:quero_workar/shared/constants/images.dart';
+import 'package:quero_workar/shared/constants/constants.dart';
 import 'package:quero_workar/ui/pages/home_page/home_page.dart';
 import 'package:transparent_image/transparent_image.dart';
 

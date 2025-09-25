@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'package:quero_workar/shared/constants/qw_theme.dart';
+import 'package:quero_workar/shared/constants/constants.dart';
 
 class JobsQuantity extends StatelessWidget {
   const JobsQuantity({

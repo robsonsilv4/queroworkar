@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show Color, Colors;
 
-class QWTheme {
+abstract class QWTheme {
   static const Color title = Colors.black87;
   static const Color subtitle = Colors.black54;
 }
