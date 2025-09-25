@@ -66,7 +66,7 @@ class Info extends StatelessWidget {
                 ),
               ),
               Text(
-                'Mobills e Emerson Vieira',
+                'Emerson Vieira',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 12,
