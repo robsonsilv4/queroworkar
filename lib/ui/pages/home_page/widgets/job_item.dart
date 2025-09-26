@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:quero_workar/data/models/job_model.dart';
 import 'package:quero_workar/shared/constants/constants.dart';
+import 'package:quero_workar/shared/utils/utils.dart';
 import 'package:quero_workar/shared/widgets/job_share.dart';
 import 'package:quero_workar/ui/pages/detail_page.dart';
 
@@ -63,7 +64,7 @@ class JobItem extends StatelessWidget {
                             ),
                             const SizedBox(height: 1),
                             Text(
-                              dateTimeFormat.format(job.date),
+                              timeAgo(job.date),
                               style: const TextStyle(
                                 fontSize: 12,
                                 color: Colors.grey,
