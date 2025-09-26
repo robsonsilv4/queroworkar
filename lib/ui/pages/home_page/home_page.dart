@@ -17,87 +17,88 @@ class HomePage extends StatelessWidget {
       body: BlocBuilder<JobsBloc, JobsState>(
         builder: (context, state) {
           if (state is JobsLoaded) {
-            return _body(
-              jobs: state.jobs,
-              context: context,
-            );
+            return _HomeBody(jobs: state.jobs);
           }
-
-          return _body(
-            jobs: [],
-            context: context,
-          );
+          return const _HomeBody(jobs: []);
         },
       ),
     );
   }
+}
 
-  Widget _body({
-    required List<Job> jobs,
-    required BuildContext context,
-  }) {
+class _HomeHeader extends StatelessWidget {
+  const _HomeHeader({
+    // Keep default size parameter
+    // ignore: unused_element_parameter
+    this.bradingImageSize = 145,
+    this.padding,
+  });
+
+  final double bradingImageSize;
+  final EdgeInsetsGeometry? padding;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: padding ?? EdgeInsets.zero,
+      child: Row(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 2),
+            child: Image.asset(
+              Images.branding,
+              width: bradingImageSize,
+              cacheWidth: bradingImageSize.ceil(),
+            ),
+          ),
+          const Spacer(),
+          const Info(),
+        ],
+      ),
+    );
+  }
+}
+
+class _HomeBody extends StatelessWidget {
+  const _HomeBody({required this.jobs});
+
+  final List<Job> jobs;
+
+  @override
+  Widget build(BuildContext context) {
     return SafeArea(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Row(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 2,
-                  ),
-                  child: Image.asset(
-                    Images.branding,
-                    width: 145,
-                  ),
-                ),
-                const Spacer(),
-                const Info(),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 22,
-              bottom: 10,
-            ),
-            child: Row(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(right: 2),
-                  child: Image.asset(
-                    Images.logo,
-                    width: 20,
-                    height: 20,
-                  ),
-                ),
-                JobsQuantity(quantity: jobs.length),
-              ],
-            ),
+          const _HomeHeader(padding: EdgeInsets.all(20)),
+          JobsQuantity(
+            quantity: jobs.length,
+            padding: const EdgeInsets.only(left: 22, bottom: 10),
           ),
           Expanded(
             child: jobs.isNotEmpty
-                ? _jobList(jobs: jobs)
-                : const LoadingQW(
-                    size: 50,
-                  ),
+                ? _JobList(jobs: jobs)
+                : const LoadingQW(size: 50),
           ),
         ],
       ),
     );
   }
+}
 
-  Widget _jobList({required List<Job> jobs}) {
+class _JobList extends StatelessWidget {
+  const _JobList({required this.jobs});
+
+  final List<Job> jobs;
+
+  @override
+  Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: jobs.length,
-      itemBuilder: (context, index) {
-        return JobItem(
-          job: jobs.elementAt(index),
-        );
-      },
+      itemBuilder: (_, index) => JobItem(
+        job: jobs.elementAt(index),
+      ),
     );
   }
 }

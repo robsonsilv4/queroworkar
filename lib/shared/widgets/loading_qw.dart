@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class LoadingQW extends StatelessWidget {
   const LoadingQW({required this.size, super.key, this.color});
+
   final double size;
   final Color? color;
 
