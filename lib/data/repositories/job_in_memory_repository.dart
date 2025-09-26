@@ -1,33 +1,55 @@
-import 'package:quero_workar/data/models/job_model.dart';
+import 'package:quero_workar/data/models/models.dart';
 import 'package:quero_workar/data/repositories/repositories.dart';
+import 'package:uuid/uuid.dart';
 
-// Company, location, etc can be added later if needed
 class JobInMemoryRepository implements JobRepository {
   JobInMemoryRepository();
 
-  final List<Job> _jobs = [
+  late final _uuid = const Uuid();
+  late final _jobs = <Job>[
     Job(
+      id: _uuid.v4(),
+      url: '',
+      company: Company(
+        id: _uuid.v4(),
+        name: 'Empresa Exemplo',
+        category: 'Outros',
+        location: 'Quixadá, CE',
+        imageUrl: 'https://picsum.photos/150?random=1',
+      ),
       title: 'Desenvolvedor Flutter',
-      url: 'https://techsolutions.com/jobs/flutter',
       description:
           'Desenvolva aplicativos móveis usando Flutter em um time ágil.',
-      image: 'https://picsum.photos/150?random=1',
       date: DateTime(2025, 3, 14, 10, 23),
     ),
     Job(
+      id: _uuid.v4(),
+      url: '',
+      company: Company(
+        id: _uuid.v4(),
+        name: 'Tech Solutions',
+        category: 'Outros',
+        location: 'Pacoti, CE',
+        imageUrl: 'https://picsum.photos/150?random=2',
+      ),
       title: 'Backend Developer',
-      url: 'https://datacorp.com/jobs/backend',
       description:
           'Responsável pelo desenvolvimento e manutenção de APIs RESTful.',
-      image: 'https://picsum.photos/150?random=2',
       date: DateTime(2025, 7, 2, 8, 5),
     ),
     Job(
+      id: _uuid.v4(),
+      url: '',
+      company: Company(
+        id: _uuid.v4(),
+        name: 'Design Studio',
+        category: 'Outros',
+        location: 'Fortaleza, CE',
+        imageUrl: 'https://picsum.photos/150?random=3',
+      ),
       title: 'UI/UX Designer',
-      url: 'https://designpro.com/jobs/uiux',
       description:
           'Crie interfaces intuitivas e experiências incríveis para usuários.',
-      image: 'https://picsum.photos/150?random=3',
       date: DateTime(2024, 12, 27, 18, 45),
     ),
   ];
@@ -38,9 +60,9 @@ class JobInMemoryRepository implements JobRepository {
   }
 
   @override
-  Future<String> getJobDetail(String url) async {
+  Future<String> getJobDetail(String id) async {
     final job = _jobs.firstWhere(
-      (job) => job.url == url,
+      (job) => job.id == id,
       orElse: () => Job.empty,
     );
     return job.description;

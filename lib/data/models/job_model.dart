@@ -1,44 +1,50 @@
 import 'package:equatable/equatable.dart';
+import 'package:quero_workar/data/models/models.dart';
 
 class Job extends Equatable {
   const Job({
-    required this.image,
+    required this.id,
+    required this.url,
+    required this.company,
     required this.title,
     required this.description,
     required this.date,
-    required this.url,
   });
 
   factory Job.fromJson(Map<String, dynamic> json) => Job(
-    image: json['image'] as String,
+    id: json['id'] as String,
+    url: json['url'] as String,
+    company: Company.fromJson(json['company'] as Map<String, dynamic>),
     title: json['title'] as String,
     description: json['description'] as String,
     date: DateTime.parse(json['date'] as String),
-    url: json['url'] as String,
   );
 
   static final empty = Job(
-    image: '',
+    id: '',
+    url: '',
+    company: Company.empty,
     title: '',
     description: '',
     date: DateTime.now(),
-    url: '',
   );
 
-  final String image;
+  final String id;
+  final String url;
+  final Company company;
   final String title;
   final String description;
   final DateTime date;
-  final String url;
 
   Map<String, dynamic> toJson() => {
-    'image': image,
+    'id': id,
+    'url': url,
+    'company': company.toJson(),
     'title': title,
     'description': description,
     'date': date.toIso8601String(),
-    'url': url,
   };
 
   @override
-  List<Object?> get props => [image, title, description, date, url];
+  List<Object?> get props => [id, url, company, title, description, date];
 }

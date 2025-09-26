@@ -40,7 +40,7 @@ class JobItem extends StatelessWidget {
               Row(
                 children: <Widget>[
                   _CompanyLogoAvatar(
-                    imageUrl: job.image,
+                    imageUrl: job.company.imageUrl,
                   ),
                   const SizedBox(
                     width: 15,
