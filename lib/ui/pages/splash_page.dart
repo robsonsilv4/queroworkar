@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quero_workar/blocs/jobs/jobs_bloc.dart';
-import 'package:quero_workar/blocs/jobs/jobs_event.dart';
 import 'package:quero_workar/data/repositories/repositories.dart';
 import 'package:quero_workar/di/service_locator.dart';
 import 'package:quero_workar/shared/constants/constants.dart';
@@ -29,7 +28,7 @@ class _SplashPageState extends State<SplashPage> {
             builder: (context) => BlocProvider(
               create: (context) => JobsBloc(
                 jobsRepository: sl.get<JobRepository>(),
-              )..add(LoadJobs()),
+              )..add(const LoadJobs()),
               child: const HomePage(),
             ),
           ),

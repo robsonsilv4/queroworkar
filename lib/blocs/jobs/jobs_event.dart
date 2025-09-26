@@ -1,10 +1,12 @@
-import 'package:equatable/equatable.dart';
+part of 'jobs_bloc.dart';
 
-abstract class JobsEvent extends Equatable {
+sealed class JobsEvent extends Equatable {
   const JobsEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class LoadJobs extends JobsEvent {}
+final class LoadJobs extends JobsEvent {
+  const LoadJobs();
+}
